@@ -1,6 +1,8 @@
 ENV["RACK_ENV"] = "test"
+
 require 'bundler'
 Bundler.require :default, :test
+
 require 'factory_girl'
 require 'rack/test'
 require 'rspec'
@@ -9,6 +11,8 @@ require_relative '../app'
 
 FactoryGirl.definition_file_paths = %w{./factories ./test/factories ./spec/factories}
 FactoryGirl.find_definitions
+
+ActiveRecord::Base.logger.level = 1
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -66,6 +70,6 @@ end
 
 def create_companies(options)
   options.each do |c|
-    create(:company, address: c[:address], country: c[:country], city: c[:city])
+    FactoryGirl.create(:company, address: c[:address], country: c[:country], city: c[:city])
   end
 end
