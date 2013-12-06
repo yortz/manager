@@ -84,6 +84,16 @@ class App < Sinatra::Base
         halt 500
       end
     end
+
+    get "/companies/:id" do
+      company = Company.find(parsed_params[:id])
+
+      if company
+        json({ status: "success", company: company })
+      else
+        halt 500
+      end
+    end
   end
 
 

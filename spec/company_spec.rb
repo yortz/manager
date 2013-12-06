@@ -61,8 +61,22 @@ describe "Api::v1::Company" do
 
   end
 
-  #describe "GET /companies/:id" do
-  #end
+  describe "GET /companies/:id" do
+    before do
+      @company = FactoryGirl.create(:company, name: "My Company", phone: 1234567890, address: "Broad Street 56 NW")
+      get "/api/v1/companies/#{@company.id}"
+    end
+
+    let(:resp) { json_parse(last_response.body) }
+    it { resp[:status].should == "success" }
+    it { resp[:company][:name].should == "My Company" }
+    it { resp[:company][:address].should == "Broad Street 56 NW" }
+    it { resp[:company][:city].should == "Milan" }
+    it { resp[:company][:country].should == "Italy" }
+    it { resp[:company][:phone].should == 1234567890 }
+
+
+  end
 
   #describe "PUT /companies/:id" do
   #end
