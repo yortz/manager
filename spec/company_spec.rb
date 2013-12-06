@@ -28,8 +28,38 @@ describe "Api::v1::Company" do
     end
   end
 
-  #describe "POST /companies" do
-  #end
+  describe "POST /companies" do
+    before do
+      post_json( "/api/v1/companies", {
+        company: {
+          name: "New Company",
+          address: "Broad Street 56 NW",
+          city: "Washington DC",
+          country: "USA",
+          email: "address@domain.com",
+          phone: 1234567 }
+      })
+    end
+
+    let(:resp) { json_parse(last_response.body) }
+    it { resp[:status].should == "success" }
+    it { resp[:company][:name].should == "New Company" }
+    it { resp[:company][:address].should == "Broad Street 56 NW" }
+    it { resp[:company][:city].should == "Washington DC" }
+    it { resp[:company][:country].should == "USA" }
+    it { resp[:company][:phone].should == 1234567 }
+
+    it "creaates a new company" do
+     Company.count.should == 1
+     Company.first.name.should == "New Company"
+     Company.first.address.should == "Broad Street 56 NW"
+     Company.first.city.should == "Washington DC"
+     Company.first.country.should == "USA"
+     Company.first.phone.should == 1234567
+    end
+
+
+  end
 
   #describe "GET /companies/:id" do
   #end
