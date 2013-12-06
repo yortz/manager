@@ -38,6 +38,7 @@ class PassportUploader < CarrierWave::Uploader::Base
 end
 
 class Company < ActiveRecord::Base
+  attr_accessor :id
   validates_presence_of :name, :address, :city, :country
   has_many :passports
 end
@@ -89,6 +90,16 @@ class App < Sinatra::Base
       company = Company.find(parsed_params[:id])
 
       if company
+        json({ status: "success", company: company })
+      else
+        halt 500
+      end
+    end
+
+    put "/companies/:id" do
+      company = Company.find(params[:id])
+
+      if company.update_attributes(parsed_params[:company])
         json({ status: "success", company: company })
       else
         halt 500

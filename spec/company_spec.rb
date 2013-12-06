@@ -57,14 +57,12 @@ describe "Api::v1::Company" do
      Company.first.country.should == "USA"
      Company.first.phone.should == 1234567
     end
-
-
   end
 
   describe "GET /companies/:id" do
     before do
-      @company = FactoryGirl.create(:company, name: "My Company", phone: 1234567890, address: "Broad Street 56 NW")
-      get "/api/v1/companies/#{@company.id}"
+      company = FactoryGirl.create(:company, name: "My Company", phone: 1234567890, address: "Broad Street 56 NW")
+      get_json "/api/v1/companies/#{company.id}"
     end
 
     let(:resp) { json_parse(last_response.body) }
@@ -74,11 +72,31 @@ describe "Api::v1::Company" do
     it { resp[:company][:city].should == "Milan" }
     it { resp[:company][:country].should == "Italy" }
     it { resp[:company][:phone].should == 1234567890 }
-
-
   end
 
-  #describe "PUT /companies/:id" do
-  #end
+  describe "PUT /companies/:id" do
+    before do
+      company = FactoryGirl.create(:company, name: "My Company", phone: 1234567890, address: "Broad Street 56 NW")
+      put_json( "/api/v1/companies/#{company.id}", {
+        company: {
+          name: "New Company",
+          address: "Main Street 57",
+          city: "Washington DC",
+          country: "USA",
+          email: "address@domain.com",
+          phone: 1234567 }
+      })
+    end
+
+    let(:resp) { json_parse(last_response.body) }
+
+    it { resp[:status].should == "success" }
+    it { resp[:company][:name].should == "New Company" }
+    it { resp[:company][:address].should == "Main Street 57" }
+    it { resp[:company][:city].should == "Washington DC" }
+    it { resp[:company][:country].should == "USA" }
+    it { resp[:company][:email].should ==  "address@domain.com"}
+    it { resp[:company][:phone].should == 1234567 }
+  end
 
 end
