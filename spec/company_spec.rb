@@ -99,4 +99,28 @@ describe "Api::v1::Company" do
     it { resp[:company][:phone].should == 1234567 }
   end
 
+  describe "POST /companies/:id/passports" do
+    before do
+      company = FactoryGirl.create(:company, name: "My Company", phone: 1234567890, address: "Broad Street 56 NW")
+      post_json( "/api/v1/companies/#{company.id}/passports", {
+        payload: {
+          file_path: "spec/fixtures/lion.pdf",
+          original_filename: "lion.pdf",
+          kind: "owner" }
+      })
+    end
+    let(:resp) { json_parse(last_response.body) }
+
+    it { resp[:status].should == "success" }
+    it { resp[:passport][:kind].should == "owner" }
+
+    it "creates the passport" do
+      company = Company.first
+      company.passports.size.should == 1
+      passport = company.passports.first
+      passport.kind.should == "owner"
+      passport.file.should_not be nil
+    end
+  end
+
 end

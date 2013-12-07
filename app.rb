@@ -28,6 +28,7 @@ module JsonHelpers
 end
 
 class PassportUploader < CarrierWave::Uploader::Base
+
   def store_dir
     "uploads/company/#{model.id}/passport"
   end
@@ -47,8 +48,10 @@ class Passport < ActiveRecord::Base
   BENEFICIARIES = ["drector", "owner"].freeze
   mount_uploader :file, PassportUploader
   belongs_to :company
-  validates_presence_of :type
+  validates_presence_of :kind
 end
+
+class FilelessIO < StringIO; attr_accessor :original_filename; end
 
 class App < Sinatra::Base
 
@@ -57,6 +60,7 @@ class App < Sinatra::Base
     enable :raise_errors, :logging
     enable :show_exceptions
     set :static_cache_control, [:private, max_age: 0, must_revalidate: true]
+    #set :show_exceptions, false
 
     # Register plugins
     register Sinatra::Namespace
@@ -101,6 +105,24 @@ class App < Sinatra::Base
 
       if company.update_attributes(parsed_params[:company])
         json({ status: "success", company: company })
+      else
+        halt 500
+      end
+    end
+
+    post "/companies/:id/passports" do
+      payload = parsed_params[:payload]
+      pdf = File.open(payload[:file_path]) {|f| f.read }
+      encoded_pdf = Base64.encode64 pdf
+      io = FilelessIO.new(Base64.decode64(encoded_pdf))
+      io.original_filename = payload[:original_filename]
+      company = Company.find(params[:id])
+      passport = company.passports.build
+      passport.kind = payload[:kind]
+      passport.file = io
+
+      if passport.save
+        json({ status: "success", passport: passport })
       else
         halt 500
       end
