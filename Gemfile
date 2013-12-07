@@ -11,6 +11,7 @@ group :development, :production do
    gem "mysql"
    gem "rake"
    gem "carrierwave"
+   gem "rspec"
 end
 
  group :test do
