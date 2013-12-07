@@ -2,4 +2,4 @@ adapter: mysql
 host: localhost
 username: root
 password:
-database: heroku_cc32fbbfa0bb39b
+database: "mysql://b215f1f12e7295:b340ff08@eu-cdbr-west-01.cleardb.com/heroku_cc32fbbfa0bb39b?reconnect=true"
