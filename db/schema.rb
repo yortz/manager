@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131206114414) do
+ActiveRecord::Schema.define(version: 20131207024114) do
 
   create_table "companies", force: true do |t|
     t.string   "name"
@@ -19,8 +19,6 @@ ActiveRecord::Schema.define(version: 20131206114414) do
     t.string   "country"
     t.string   "email"
     t.integer  "phone"
-    t.integer  "owner_id"
-    t.integer  "director_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -30,6 +28,7 @@ ActiveRecord::Schema.define(version: 20131206114414) do
     t.string   "file"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "kind"
   end
 
 end
