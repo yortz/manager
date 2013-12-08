@@ -60,6 +60,7 @@ class App < Sinatra::Base
     enable :raise_errors, :logging
     enable :show_exceptions
     set :static_cache_control, [:private, max_age: 0, must_revalidate: true]
+    set :show_exceptions, false if ENV["RACK_ENV"] == "test"
 
     # Register plugins
     register Sinatra::Namespace
@@ -133,3 +134,4 @@ class App < Sinatra::Base
 
 
 end
+
