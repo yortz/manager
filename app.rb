@@ -60,20 +60,22 @@ class App < Sinatra::Base
     enable :raise_errors, :logging
     enable :show_exceptions
     set :static_cache_control, [:private, max_age: 0, must_revalidate: true]
-    #set :show_exceptions, false
 
     # Register plugins
     register Sinatra::Namespace
+
+  end
+
+
+  helpers JsonHelpers
+
+  namespace "/api/v1" do
 
     # Set default content type to json
     before do
       content_type :json
     end
-  end
 
-  helpers JsonHelpers
-
-  namespace "/api/v1" do
     get "/companies" do
       companies = Company.all
       json({ status: "success", companies: companies })
