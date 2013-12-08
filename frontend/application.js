@@ -1,0 +1,14 @@
+//= require_self
+//= require jquery-1.10.2
+//= require json2
+//= require lodash
+//= require backbone
+//= require mustache
+//= require namespace
+//= require routing
+//= require router
+//= require_tree ./models
+//= require_tree ./templates
+//= require_tree ./views
+//= require_tree ./collections
+//= require app
