@@ -1,3 +1,4 @@
 .DS_STORE
 spec/public
 public/uploads
+spec/javascripts/*.js
