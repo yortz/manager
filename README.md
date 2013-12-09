@@ -30,7 +30,8 @@ A company has the following attributes:
 
 ## Test:
 
-    $: rake 
+    $: rake spec #runs specs
+    $: rake test #runs js specs
 
 ## Contribute:
 
