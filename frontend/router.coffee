@@ -13,8 +13,5 @@ class frontend.Router extends Backbone.Router
 
   dashboard: ->
     console.log "root"
-    #@render bmf.views.Dashboard
 
-  gene_retrieval: (name) -> console.log "retrieving #{name} gene"
   companies:  -> console.log "companies"
-  genes: -> console.log "genes"

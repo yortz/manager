@@ -1,9 +1,9 @@
 frontend.models.Company = Backbone.Model.extend
-  
+
   defaults:
-    name:""
-    address:""
+    name: ""
+    address: ""
     city: ""
     country: ""
-    email:""
-    phone:""
+    email: ""
+    phone: ""
