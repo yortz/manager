@@ -37,7 +37,8 @@ Capybara::Jasmine::TestTask.new "testjs" => "coffee" do |t|
   Capybara.javascript_driver = :poltergeist
   t.lib_files = FileList[
     "public/application.js",
-    "spec/spec_helper.js"
+    "spec/javascripts/support/*.js",
+    "spec/javascripts/spec_helper.js"
   ].uniq
   t.spec_files = FileList["spec/javascripts/**/*spec.js"]
 end
