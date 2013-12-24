@@ -2,3 +2,4 @@
 spec/public
 public/uploads
 spec/javascripts/*.js
+spec/javascripts/**/*.js
