@@ -48,16 +48,16 @@ describe "Company model", ->
       @server.restore()
 
     it "should not save when name is empty", ->
-      @company.bind "invalid", @eventSpy
+      @company.bind "validated:invalid", @eventSpy
       @company.save name: ""
-      expect(@eventSpy).toHaveBeenCalledOnce()
-      expect(@eventSpy).toHaveBeenCalledWith(@company, "name can't be blank")
+      # move this into a create model action and create our company on runtime
+      #expect(@company.isValid()).toBeFalsy()
+      expect(@company.validationError).toEqual( name: ["name can't be blank"])
 
     it "should not save when address is empty", ->
-      @company.bind "invalid", @eventSpy
+      @company.bind "validated:invalid", @eventSpy
       @company.save address: ""
-      expect(@eventSpy).toHaveBeenCalledOnce()
-      expect(@eventSpy).toHaveBeenCalledWith(@company, "address can't be blank")
+      expect(@company.validationError).toEqual( address: ["address can't be blank"])
 
     it "should make a save request to the server", ->
       @company.save()
