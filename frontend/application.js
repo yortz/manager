@@ -3,6 +3,7 @@
 //= require json2
 //= require lodash
 //= require backbone
+//= require backbone-validation
 //= require mustache
 //= require namespace
 //= require routing
