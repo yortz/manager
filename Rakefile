@@ -38,6 +38,7 @@ Capybara::Jasmine::TestTask.new "testjs" => "coffee" do |t|
   t.lib_files = FileList[
     "spec/javascripts/support/sinon-1.7.3.js",
     "spec/javascripts/support/jasmine-sinon.js",
+    "spec/javascripts/fixtures/*.js",
     "spec/javascripts/spec_helper.js",
     "public/application.js"
   ].uniq
