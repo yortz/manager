@@ -86,3 +86,25 @@ describe "Companies collection", ->
         country: "USA"
         email: "email@domain.com"
         phone: 123456
+
+  describe "when fetching collection from server", ->
+    beforeEach ->
+      @fixture = @fixtures.Companies.valid
+      @fixtureCompanies = @fixture.response.companies
+      @server = sinon.fakeServer.create()
+      @server.respondWith "GET", "/api/v1/companies", @validResponse(@fixture)
+
+    afterEach ->
+      @server.restore()
+
+    it "should make the correct request", ->
+      @companies.fetch()
+      expect(@server.requests.length).toEqual 1
+      expect(@server.requests[0].method).toEqual "GET"
+      expect(@server.requests[0].url).toEqual "/api/v1/companies"
+
+    it "should parse the companies from the response", ->
+      @companies.fetch()
+      @server.respond()
+      expect(@companies.length).toEqual @fixture.response.companies.length
+      expect(@companies.get(1).get("name")).toEqual @fixture.response.companies[0].name
