@@ -39,8 +39,10 @@ Capybara::Jasmine::TestTask.new "testjs" => "coffee" do |t|
     "spec/javascripts/support/sinon-1.7.3.js",
     "spec/javascripts/support/jasmine-sinon.js",
     "spec/javascripts/fixtures/*.js",
+    "spec/javascripts/templates/*.js",
     "spec/javascripts/spec_helper.js",
-    "public/application.js"
+    "public/application.js",
+    "spec/javascripts/support/jasmine-jquery.js"
   ].uniq
   t.spec_files = FileList["spec/javascripts/**/*spec.js"]
 end
@@ -51,7 +53,7 @@ task :compile => :cleanup do
   Dir.mkdir PUBLIC_DIR if !File.exists?(PUBLIC_DIR)
 
   sprockets = Sprockets::Environment.new
-  
+
   unless ENV['RAKE_ENV'] == "development"
     sprockets.css_compressor = YUI::CssCompressor.new
     sprockets.js_compressor  = Uglifier.new
