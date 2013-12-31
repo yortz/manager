@@ -4,7 +4,7 @@
 //= require lodash
 //= require backbone
 //= require backbone-validation
-//= require mustache
+//= require handlebars-v1.2.0
 //= require namespace
 //= require routing
 //= require router
