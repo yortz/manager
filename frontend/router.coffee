@@ -12,6 +12,11 @@ class frontend.Router extends Backbone.Router
     @$el.empty().append (new viewKlass(options)).render().el
 
   dashboard: ->
-    console.log "root"
+    @render frontend.views.Companies, {collection: new frontend.collections.Companies()}
 
-  companies:  -> console.log "companies"
+  companies: ->
+    @render frontend.views.Companies, {collection: new frontend.collections.Companies()}
+
+  company: (id) ->
+    @company = new frontend.models.Company(id: id)
+    @companyView = frontend.views.Company(model: @company)
