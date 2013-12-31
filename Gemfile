@@ -11,8 +11,6 @@ group :development, :production do
   gem 'rake'
   gem 'yui-compressor', '~> 0.9.6'
   gem 'eco', '~> 1.0.0'
-  gem 'capybara-jasmine'
-  gem 'poltergeist'
   gem "sinatra"
   gem "sinatra-contrib"
   gem "multi_json"
@@ -21,10 +19,12 @@ group :development, :production do
   gem "mysql"
   gem "rake"
   gem "carrierwave"
-  gem "rspec"
+  gem "rerun"
 end
 
  group :test do
+  gem 'capybara-jasmine'
+  gem 'poltergeist'
   gem "rspec"
   gem "rack-test", "~> 0.6.1"
   gem 'factory_girl'
