@@ -39,7 +39,6 @@ class PassportUploader < CarrierWave::Uploader::Base
 end
 
 class Company < ActiveRecord::Base
-  attr_accessor :id
   validates_presence_of :name, :address, :city, :country
   has_many :passports
 end
@@ -79,7 +78,7 @@ class App < Sinatra::Base
 
     get "/companies" do
       companies = Company.all
-      json({ status: "success", companies: companies })
+      json({ status: "success", response: {companies: companies} })
     end
 
     post "/companies" do
