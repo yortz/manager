@@ -1,6 +1,7 @@
 frontend.views.Companies = Backbone.View.extend
   tagName: "ul"
-  className: "companies"
+  className: "list-group"
+
   initialize: (options) ->
     @template = Handlebars.compile(options.template or "<h2>Here is a list of Companies</h2>")
     @collection.fetch()
