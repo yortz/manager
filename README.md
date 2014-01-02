@@ -27,6 +27,18 @@ A company has the following attributes:
     $: bundle
     $: rake db:create
     $: rake db:migrate
+    $: rake db:seed
+    
+## Start:
+
+Start up your app by issuing the following command:
+    
+    $: rake rerun 'rackup'
+
+This will use [rerun](https://github.com/alexch/rerun) to automatically reload your app whenever you edit a file that is part of sinatra's fileystem.
+You can open a new terminal window to automatically watch for changes and compile your .coffee, .js, .css, .scss files by issuing the following command thanks to [guard](https://github.com/guard/guard)
+
+    $: rake guard
 
 ## Test:
 
@@ -40,11 +52,3 @@ A company has the following attributes:
 * Commit your changes: `git commit -am 'Some feature'`
 * Push to your branch: `git push origin feature-branch`
 * Create a Pull Request
-
-## Dependencies:
-
-* [ruby](https://www.ruby-lang.org) 
-* [sinatra](http://www.sinatrarb.com/)
-* [rspec](https://github.com/rspec/rspec)
-* mysql
-* [factory_girl](https://github.com/thoughtbot/factory_girl)
