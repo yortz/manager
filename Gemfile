@@ -30,3 +30,7 @@ end
   gem 'factory_girl'
   gem 'database_cleaner'
  end
+
+ group :tools do
+   gem 'guard-rake'
+ end
