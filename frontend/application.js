@@ -1,5 +1,6 @@
 //= require_self
 //= require jquery-1.10.2
+//= require vendor/bootstrap/js/bootstrap
 //= require json2
 //= require lodash
 //= require backbone
