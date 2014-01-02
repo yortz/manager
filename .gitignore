@@ -1,6 +1,7 @@
 .DS_STORE
 spec/public
 public/application.js
+public/application.css
 public/uploads
 spec/javascripts/*.js
 spec/javascripts/**/*.js
